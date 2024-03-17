@@ -1,7 +1,7 @@
 export const Endpoints = {
     search: {
         all: 'autocomplete.get',
-        songs: 'c',
+        songs: 'search.getResults',
         albums: 'search.getAlbumResults',
         artists: 'search.getArtistResults',
         playlists: 'search.getPlaylistResults',
@@ -25,6 +25,7 @@ export const Endpoints = {
     },
     playlists: {
         id: 'playlist.getDetails',
+        link: 'webapi.get',
     },
     modules: 'content.getBrowseModules',
     trending: 'content.getTrending',

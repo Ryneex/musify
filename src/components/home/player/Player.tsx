@@ -32,7 +32,7 @@ export default function Player() {
     // Handles Playback
     useEffect(() => {
         if (!audio) return
-        Playing && isPointerDown === false ? audio.play() : audio.pause()
+        Playing && isPointerDown === false ? audio.play().catch(() => null) : audio.pause()
     }, [Playing, audio, isPointerDown, currentSong])
 
     // Resets currentTime , SliderValue and plays the song when currentSong changes
@@ -63,7 +63,7 @@ export default function Player() {
             <audio onTimeUpdate={updateSliderValue} ref={audioRef} src={currentSong.download_url}></audio>
             <div className="flex max-w-3xl basis-full gap-6">
                 <div className="flex items-center gap-3 text-2xl text-black/90 dark:text-white/90">
-                    <MdSkipPrevious className="cursor-pointer" />
+                    <MdSkipPrevious onClick={() => player.playPrevSong()} className="cursor-pointer" />
                     <div
                         className="flex aspect-square w-6 cursor-pointer items-center justify-center overflow-hidden rounded-full"
                         onClick={() => audio?.src && player.togglePlay()}
@@ -74,7 +74,7 @@ export default function Player() {
                             <IoPlayOutline className="ml-1 text-[20px]" />
                         )}
                     </div>
-                    <MdSkipNext className="cursor-pointer" />
+                    <MdSkipNext onClick={() => player.playNextSong()} className="cursor-pointer" />
                 </div>
                 <div className="flex basis-full items-center gap-3">
                     <span className="text-xs text-black/90 dark:text-white/50">{formattedCurrentTime}</span>

@@ -2,6 +2,7 @@ import ky from 'ky'
 
 const request = ky.create({
     prefixUrl: 'https://www.jiosaavn.com/api.php',
+    cache: 'no-store',
     method: 'get',
     searchParams: {
         _format: 'json',

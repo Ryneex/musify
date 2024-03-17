@@ -1,9 +1,9 @@
 'use server'
 
 import request from '@/config/ky.config'
+import { Endpoints } from '@/constants/endpoints'
 import decryptUrl from '@/helpers/decryptUrl'
 import Song from '@/types/song.types'
-import ky from 'ky'
 
 const getAlbums = (data: any) => {
     // Retreaving only albums from data array
@@ -25,7 +25,7 @@ export default async function getTrendingData() {
         const data = await request
             .get('', {
                 searchParams: {
-                    __call: 'content.getTrending',
+                    __call: Endpoints.trending,
                 },
             })
             .json()
