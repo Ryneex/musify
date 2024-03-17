@@ -1,5 +1,5 @@
-import Player from '@/components/home/player/Player'
-import Sidebar from '@/components/home/Sidebar'
+import Player from '@/components/dashboard/player/Player'
+import Sidebar from '@/components/dashboard/Sidebar'
 import { ReactNode } from 'react'
 
 export default function layout({ children }: { children: ReactNode }) {

@@ -8,6 +8,6 @@ export default function decryptUrl(encrypted_media_url: string) {
     decipher.start({ iv: util.createBuffer(iv) })
     decipher.update(util.createBuffer(encrypted))
     decipher.finish()
-    const media_url = decipher.output.getBytes()
-    return media_url.replace('_96', '_320')
+    const download_url = decipher.output.getBytes()
+    return download_url.replace('_96', '_320')
 }

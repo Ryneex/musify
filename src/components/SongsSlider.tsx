@@ -10,26 +10,26 @@ import { FaRegCirclePlay } from 'react-icons/fa6'
 
 type Props = {
     songs: Song[]
+    name: string
 }
 
-export default function SongsSlider({ songs }: Props) {
+export default function SongsSlider({ songs, name }: Props) {
     const { currentSong, Playing } = useSnapshot(player)
     const [emblaRef, emblaApi] = useEmblaCarousel({
         align: 'start',
         slidesToScroll: 3,
         watchDrag: false,
     })
-
     return (
         <div className="overflow-hidden">
             <div className="flex items-center justify-between">
-                <h2 className="mb-4 text-xl font-bold text-black/95 dark:text-white/85">Trending Songs</h2>
+                <h2 className="mb-4 text-xl font-bold text-black/95 dark:text-white/85">{name}</h2>
                 <div className="flex select-none gap-2 text-2xl text-black/60 dark:text-white/60">
                     <MdOutlineKeyboardArrowLeft className="cursor-pointer" onClick={() => emblaApi?.scrollPrev()} />
                     <MdOutlineKeyboardArrowRight className="cursor-pointer" onClick={() => emblaApi?.scrollNext()} />
                 </div>
             </div>
-            <div ref={emblaRef}>
+            <div className="overflow-hidden" ref={emblaRef}>
                 <div className="flex gap-4">
                     {songs.map((e) => (
                         <div

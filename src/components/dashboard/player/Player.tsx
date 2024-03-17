@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Slider } from '@/components/home/player/slider'
+import { Slider } from '@/components/dashboard/player/slider'
 import { IoPlayOutline } from 'react-icons/io5'
 import { MdSkipNext, MdSkipPrevious } from 'react-icons/md'
 import { IoIosPause } from 'react-icons/io'

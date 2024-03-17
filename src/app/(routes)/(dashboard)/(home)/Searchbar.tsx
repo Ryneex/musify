@@ -10,7 +10,7 @@ export default function Searchbar() {
     const router = useRouter()
     function Search(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        router.push('/search?query' + encodeURIComponent(input))
+        router.push('/search?query=' + encodeURIComponent(input))
     }
     return (
         <form onSubmit={Search} className="flex gap-2">
