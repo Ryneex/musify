@@ -6,28 +6,26 @@ const player = proxy({
     currentSong: {} as Song,
     SongList: [] as Song[],
     Playing: false,
-    Loaded: false,
     togglePlay() {
         player.Playing = !player.Playing
     },
     playPrevSong() {
-        for (let i = 0; i < this.SongList.length; i++) {
-            if (this.currentSong.id === this.SongList[0].id) this.currentSong = this.SongList[this.SongList.length - 1]
-            if (this.SongList[i].id === this.currentSong.id) {
-                this.currentSong = this.SongList[i - 1]
-                break
-            }
+        const currentSongIndex = this.SongList.findIndex((song) => song.id === this.currentSong.id)
+        //We want to play the last song if currentSong is the first song
+        if (currentSongIndex === 0) {
+            this.currentSong = this.SongList[this.SongList.length - 1]
+            return
         }
+        this.currentSong = this.SongList[currentSongIndex - 1]
     },
     playNextSong() {
-        this.Playing = false
-        for (let i = 0; i < this.SongList.length; i++) {
-            if (this.currentSong.id === this.SongList[this.SongList.length - 1].id) this.currentSong = this.SongList[0]
-            if (this.SongList[i].id === this.currentSong.id) {
-                this.currentSong = this.SongList[i + 1]
-                break
-            }
+        const currentSongIndex = this.SongList.findIndex((song) => song.id === this.currentSong.id)
+        //We want to play the first song if currentSong is the last song
+        if (currentSongIndex === this.SongList.length - 1) {
+            this.currentSong = this.SongList[0]
+            return
         }
+        this.currentSong = this.SongList[currentSongIndex + 1]
     },
 })
 devtools(player, { name: 'player', enabled: true })
