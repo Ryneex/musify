@@ -1,47 +1,50 @@
 export default interface Song {
     id: string
+    name: string
     type: string
-    song: string
-    album: string
-    year: string
-    music: string
-    music_id: string
-    primary_artists: string
-    primary_artists_id: string
-    featured_artists: string
-    featured_artists_id: string
-    singers: string
-    starring: string
-    image: string
+    year: number
+    releaseDate: string
+    duration: number
     label: string
-    albumid: string
+    explicitContent: boolean
+    playCount: number
     language: string
-    origin: string
-    play_count: number
-    is_drm: number
-    copyright_text: string
-    is_dolby_content: boolean
-    explicit_content: number
-    has_lyrics: string
-    lyrics_snippet: string
-    encrypted_drm_media_url: string
-    encrypted_media_url: string
-    encrypted_media_path: string
-    media_preview_url: string
+    hasLyrics: boolean
+    lyricsId: string
+    lyrics: Lyrics
+    url: string
+    copyright: string
+    album: Album
+    artists: Artists
+    image: Image[]
     download_url: string
-    perma_url: string
-    album_url: string
-    duration: string
-    webp: boolean
-    cache_state: string
-    starred: string
-    artistMap: any[]
-    release_date: string
-    vcode: string
-    vlink: string
-    triller_available: boolean
-    label_url: string
-    weight: number
-    rights: any[]
-    secondary_subtitle: string
+    downloadUrl: DownloadUrl[]
+}
+
+export interface Lyrics {
+    lyrics: string
+    copyright: string
+    snippet: string
+}
+
+export interface Album {
+    id: string
+    name: string
+    url: string
+}
+
+export interface Artists {
+    primary: any[]
+    featured: any[]
+    all: any[]
+}
+
+export interface Image {
+    quality: any
+    url: any
+}
+
+export interface DownloadUrl {
+    quality: any
+    url: any
 }

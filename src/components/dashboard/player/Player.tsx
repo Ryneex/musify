@@ -37,7 +37,7 @@ export default function Player() {
 
     // Resets currentTime , SliderValue and plays the song when currentSong changes
     useEffect(() => {
-        if (!currentSong.download_url) return
+        if (!currentSong.downloadUrl) return
         setSliderValue(0)
         setCurrentTime(0)
         player.Playing = true
@@ -60,7 +60,12 @@ export default function Player() {
 
     return (
         <div className="col-span-2 flex  select-none items-center justify-center gap-2 border-t-2 border-black/10 dark:border-white/10">
-            <audio onTimeUpdate={updateSliderValue} ref={audioRef} src={currentSong.download_url}></audio>
+            <audio
+                onTimeUpdate={updateSliderValue}
+                ref={audioRef}
+                src={currentSong.downloadUrl ? currentSong.downloadUrl[currentSong.downloadUrl.length - 1].url : ''}
+                onEnded={() => player.playNextSong()}
+            ></audio>
             <div className="flex max-w-3xl basis-full gap-6">
                 <div className="flex items-center gap-3 text-2xl text-black/90 dark:text-white/90">
                     <MdSkipPrevious onClick={() => player.playPrevSong()} className="cursor-pointer" />

@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/shadcn/ui/button'
 import { Input } from '@/components/shadcn/ui/input'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next-nprogress-bar'
 import { FormEvent, useState } from 'react'
 
 export default function Searchbar() {
@@ -10,7 +10,8 @@ export default function Searchbar() {
     const router = useRouter()
     function Search(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        router.push('/search?query=' + encodeURIComponent(input))
+        if (input.trim() === '') return
+        router.push('/search?query=' + encodeURIComponent(input.trim()))
     }
     return (
         <form onSubmit={Search} className="flex gap-2">

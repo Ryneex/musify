@@ -2,7 +2,7 @@
 
 import request from '@/config/ky.config'
 import { Endpoints } from '@/constants/endpoints'
-import decryptUrl from '@/helpers/decryptUrl'
+import { formatSong } from '@/helpers/format.song'
 import Song from '@/types/song.types'
 
 const getAlbums = (data: any) => {
@@ -14,16 +14,13 @@ const getAlbums = (data: any) => {
 const getSongs = (data: any): Song[] => {
     // Retreaving only songs from data array
     const songs = data.filter((e: any) => e.type === 'song')
-    return songs.map(({ details, type }: any) => {
-        const download_url = decryptUrl(details.encrypted_media_url)
-        return { ...details, type, download_url }
-    })
+    return songs.map((e: any) => formatSong(e))
 }
 
 export default async function getTrendingData() {
     try {
         const data = await request
-            .get('', {
+            .get('https://www.jiosaavn.com/api.php', {
                 searchParams: {
                     __call: Endpoints.trending,
                 },
@@ -33,9 +30,9 @@ export default async function getTrendingData() {
         // and retreaving only necessary datas like songs and albums, because we don't want album data inside song variable
         const songs = getSongs(data)
         const albums = getAlbums(data)
-        return { songs, albums }
+        return { success: true, songs, albums }
     } catch (data) {
         console.log(data)
-        return { err: 'Something went wrong when fetching Trending Data' }
+        return { success: false, message: 'Something went wrong when fetching Trending Data' }
     }
 }

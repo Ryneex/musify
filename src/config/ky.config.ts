@@ -1,11 +1,12 @@
 import ky from 'ky'
 
 const request = ky.create({
-    prefixUrl: 'https://www.jiosaavn.com/api.php',
-    cache: 'no-store',
     method: 'get',
     searchParams: {
         _format: 'json',
+        _marker: '0',
+        ctx: 'web6dot0',
+        api_version: '4'
     },
     timeout: 30000,
     headers: {
