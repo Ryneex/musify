@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import TopProgressbar from '@/components/TopProgressbar'
+import { cookies } from 'next/headers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,8 +16,9 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
+    const theme = cookies().get('theme')
     return (
-        <html lang="en" className="">
+        <html lang="en" className={theme?.value || 'light'}>
             <body className={inter.className}>
                 <TopProgressbar />
                 {children}

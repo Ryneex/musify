@@ -9,18 +9,14 @@ import { GoHome } from 'react-icons/go'
 export default function Sidebar() {
     const pathname = usePathname()
 
-    useEffect(() => {
-        console.log(pathname)
-    }, [pathname])
-
     const links = [
         { name: 'Discover', href: '/', icon: <GoHome /> },
-        { name: 'Top Albums', href: '/albums', icon: <BiAlbum /> },
+        { name: 'Top Albums', href: '/album', icon: <BiAlbum /> },
         { name: 'Favourite', href: '/favourite', icon: <BiHeart /> },
     ]
 
     return (
-        <div className="border-r-2 border-black/10 px-3 py-2 backdrop-blur-md dark:border-white/10">
+        <div className="border-r-2 border-black/10 row-span-2 px-3 py-2 backdrop-blur-md dark:border-white/10">
             <h1 className="text-2xl font-bold text-black/90 dark:text-white/90">Musify</h1>
             <div className="mt-5 flex flex-col gap-1 font-medium text-black/80 dark:font-normal dark:text-white/80">
                 {links.map((link, i) => (

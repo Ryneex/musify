@@ -2,13 +2,15 @@
 
 import request from '@/config/ky.config'
 import { Endpoints } from '@/constants/endpoints'
+import { formatAlbum } from '@/helpers/format.album'
 import { formatSong } from '@/helpers/format.song'
+import Album from '@/types/album.types'
 import Song from '@/types/song.types'
 
-const getAlbums = (data: any) => {
+const getAlbums = (data: any): Album[] => {
     // Retreaving only albums from data array
     const album = data.filter((e: any) => e.type === 'album')
-    return album.map(({ details, type }: any) => ({ ...details, type }))
+    return album.map((e: any) => formatAlbum(e))
 }
 
 const getSongs = (data: any): Song[] => {
@@ -23,6 +25,7 @@ export default async function getTrendingData() {
             .get('https://www.jiosaavn.com/api.php', {
                 searchParams: {
                     __call: Endpoints.trending,
+                    n: 100
                 },
             })
             .json()
@@ -32,7 +35,6 @@ export default async function getTrendingData() {
         const albums = getAlbums(data)
         return { success: true, songs, albums }
     } catch (data) {
-        console.log(data)
         return { success: false, message: 'Something went wrong when fetching Trending Data' }
     }
 }

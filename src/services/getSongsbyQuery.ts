@@ -6,11 +6,12 @@ export default async function getSongsbyQuery(query: string) {
             .get('https://saavn.dev/api/search/songs', {
                 searchParams: {
                     query,
+                    limit: 1000,
                 },
             })
             .json()
-        return data.data.results
+        return { success: true, songs: data.data.results }
     } catch (data) {
-        return { err: 'Something went wrong when fetching Trending Data' }
+        return { success: false, message: 'Something went wrong when fetching Trending Data' }
     }
 }

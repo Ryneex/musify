@@ -1,5 +1,6 @@
 import getTrendingData from '@/services/getTrendingData'
 import SongsSlider from '@/components/SongsSlider'
+import AlbumSlider from '@/components/AlbumSlider'
 
 export default async function page() {
     const data = await getTrendingData()
@@ -10,9 +11,11 @@ export default async function page() {
             </h1>
         )
     return (
-        <div>
-            <SongsSlider name="Trending Songs" songs={data.songs ?? []} />
-            {/* <AlbumSlider albums={data.albums ?? []} name="Albums" /> */}
+        <div className="overflow-hidden pl-5 pt-5">
+            <div className="h-full custom-scrollbar overflow-auto">
+                <SongsSlider name="Trending Songs" songs={data.songs} />
+                <AlbumSlider name="Albums" albums={data.albums} />
+            </div>
         </div>
     )
 }

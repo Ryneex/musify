@@ -1,19 +1,17 @@
 import request from '@/config/ky.config'
-import { Endpoints } from '@/constants/endpoints'
 
 export default async function getAlbumsbyQuery(query: string) {
     try {
-        const data: any = await request
-            .get('', {
+        const res: any = await request
+            .get('https://saavn.dev/api/search/albums', {
                 searchParams: {
-                    __call: Endpoints.search.albums,
-                    q: query,
+                    query: query,
+                    limit: 1000,
                 },
             })
             .json()
-        return data.results
+        return { success: true, albums: res.data.results }
     } catch (data) {
-        console.log(data)
-        return { err: 'Something went wrong when fetching Trending Data' }
+        return { success: false, message: 'Something went wrong when fetching Album Queries' }
     }
 }
